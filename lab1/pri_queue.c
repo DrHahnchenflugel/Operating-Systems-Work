@@ -13,23 +13,34 @@ void PQ_insert(int priority, char * data) {
     Node_ptr_t new = (Node_ptr_t) malloc(sizeof(Node_t));
     new->priority = priority;
     new->data = data;
-    new->next = NULL;
-    if (PQ_get_head() == NULL){
+    
+    if (PQ_get_size() == 0){
+        
         head = new;
+        new->next = NULL;
+        
     } else {
+        
         Node_ptr_t current = head;
         Node_ptr_t prev = NULL;
-        while (current->next != NULL){
-            prev = current;
-            current = current->next;
-
-            if (current->priority < new->priority){
+        
+        while (current != NULL){
+            if (current->priority > new->priority){
+                prev = current;
+                current = current->next;                
+            }
+            else {
+                new -> next = current;
+                if (prev != NULL) prev -> next = new;
                 break;
             }
         }
         
-        new -> next = current -> next;
-        prev -> next = new;
+        if (current == NULL) current -> next = new;
+        
+        if (current == PQ_get_head()){
+            head = new;
+        }
     }
     return;
 }
@@ -38,30 +49,7 @@ void PQ_insert(int priority, char * data) {
  * @return The highest priority Node.
  */
 Node_ptr_t PQ_delete() {
-    Node_ptr_t highest = head;
-    
-    Node_ptr_t current = head;
-    while (current->next != NULL){
-        current = current->next;
-        if (current->priority > highest->priority){
-            highest = current;
-        }
-    }
-
-    current = head;
-    Node_ptr_t previous = NULL;
-    while (current != highest){
-        previous = current;
-        current = current -> next;
-    }
-
-    if (previous != NULL){
-        previous -> next = current -> next;    
-    }
-    else {
-        head = current -> next;
-    }
-    return highest;
+    if (head != NULL) head = head -> next;
 }
 
 /**
