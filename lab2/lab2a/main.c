@@ -9,18 +9,28 @@ int main(int argc, char* argv[]) {
     int exit_code = EXIT_SUCCESS;
     char * greeting = "Hello";
     char * person = "UNKNOWN";
-    //Add code to change the exit_code depending on argc
+    switch(argc){
+        case 2:
+            exit_code = 0;
+            break;
+        case 1:
+            exit_code = 1;
+            break;
+        default:
+            exit_code = 2;
+    }
     
-    
-    //Add code to change 'person' if one is given on command line
-    
+    if (argc > 1) {
+        person = argv[1];
+    }
+
     int len = strlen(argv[0]);
     char * last3 = argv[0] + len - 3; //last3 points to last 3 chars
     fprintf(stderr, "%s\n", argv[0]);
     fprintf(stderr, "%s\n", last3);
     
-    //Add code to change 'greeting' if last 3 chars of command are 'bye'
-  
+    if (last3 == "bye") greeting = "goodbye";
+
     printf("%s %s\n", greeting, person);
     
     fprintf(stderr, "exit_code: %d\n", exit_code);
