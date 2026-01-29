@@ -26,14 +26,20 @@ int main(int argc, char* argv[]) {
 
     int len = strlen(argv[0]);
     char * last3 = argv[0] + len - 3; //last3 points to last 3 chars
-    fprintf(stderr, "%s\n", argv[0]);
-    fprintf(stderr, "%s\n", last3);
+    //fprintf(stderr, "%s\n", argv[0]);
+    //fprintf(stderr, "%s\n", last3);
+    //fprintf(stderr, "%d\n", strcmp(last3, "bye"));
     
-    if (last3 == "bye") greeting = "goodbye";
+    if (len >= 3) {
+        char *last3 = argv[0] + len - 3;
+        if (strcmp(last3, "bye") == 0) {
+            greeting = "Bye";
+        }
+    }
 
     printf("%s %s\n", greeting, person);
     
-    fprintf(stderr, "exit_code: %d\n", exit_code);
+    //fprintf(stderr, "exit_code: %d\n", exit_code);
     
     return exit_code; //Could also say exit(exit_code)
 }
