@@ -23,12 +23,17 @@ int main(int argc, char * argv[]) {
 
     for (i = 0; i < N_REPS; i++) {
         char * cp = argv[1];
+        while (system("mkdir junk 2>/dev/null") != 0) usleep(100);
 
         while (*cp) {
+
             printf("%c", *cp++);
             fflush(stdout);
+
             usleep(random() % slow_down);
         }
+        system("rmdir junk");
+
         usleep(5000);
     }
     return EXIT_SUCCESS;
