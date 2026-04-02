@@ -1,0 +1,3 @@
+cd operating-systems-work/lab7
+javac *.java
+java Main

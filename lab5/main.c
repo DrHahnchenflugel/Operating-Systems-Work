@@ -9,14 +9,40 @@
 void * count(void *);
 int globalNumber = 0;
 //Create a mutex
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
 
 int main(void) {
     int i;
     pthread_t counterThread[5];
-
+    int returnValues[5];
 
     //Create the 5 threads
+    if( (returnValues[0]=pthread_create( &counterThread[0], NULL, &count, NULL)) )
+    {
+        printf("Thread creation failed: %d\n", returnValues[0]);
+    }
+    if( (returnValues[1]=pthread_create( &counterThread[1], NULL, &count, NULL)) )
+    {
+        printf("Thread creation failed: %d\n", returnValues[1]);
+    }
+
+    if( (returnValues[2]=pthread_create( &counterThread[2], NULL, &count, NULL)) )
+    {
+        printf("Thread creation failed: %d\n", returnValues[2]);
+    }
+
+    if( (returnValues[3]=pthread_create( &counterThread[3], NULL, &count, NULL)) )
+    {
+        printf("Thread creation failed: %d\n", returnValues[3]);
+    }
+
+    if( (returnValues[4]=pthread_create( &counterThread[4], NULL, &count, NULL)) )
+    {
+        printf("Thread creation failed: %d\n", returnValues[4]);
+    }
+
     //Wait for all treads to finish
+    for (int i = 0; i < 5; i++) pthread_join(counterThread[i], NULL);
 
     return (0);
 }
